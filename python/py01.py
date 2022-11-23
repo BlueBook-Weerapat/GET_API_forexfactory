@@ -3,41 +3,21 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
 driver = webdriver.Chrome(ChromeDriverManager().install())
-
-
-
-# from selenium import webdriver
-# from selenium.webdriver.chrome.options import Options
-
-# chromeDriverPath = 'C:/Program Files/Google/Chrome/Application/chrome.exe'
-# userdatadir = 'C:/Users/Weera/AppData/Local/Google/Chrome/User Data'
-# chromeOptions = webdriver.ChromeOptions() 
-# chromeOptions.add_argument(f"--user-data-dir={userdatadir}") #Path to your chrome profile
-# driver = webdriver.Chrome(chromeDriverPath, options=chromeOptions) 
-
-
-
-
-
 try:
     driver.get("https://www.forexfactory.com/calendar?day=nov23.2022")
-    # Get the table
     table = driver.find_element(By.CLASS_NAME, "calendar__table")
-    # Iterate over each table row
     for row in table.find_elements(By.TAG_NAME, "tr"):
-        # list comprehension to get each cell's data and filter out empty cells
         row_data = list(filter(None,[td.text for td in row.find_elements(By.TAG_NAME, "td")]))
         data = list(filter(None,[td.get_attribute("class") for td in row.find_elements(By.TAG_NAME, "td")]))
 
-
         def fun(variable):
-            letters = [
+            icon_class = [
             'calendar__cell calendar__impact impact calendar__impact calendar__impact--holiday',
             'calendar__cell calendar__impact impact calendar__impact calendar__impact--low',
             'calendar__cell calendar__impact impact calendar__impact calendar__impact--medium',
             'calendar__cell calendar__impact impact calendar__impact calendar__impact--high'
             ]
-            if (variable in letters):
+            if (variable in icon_class):
                 return True
             else:
                 return False
@@ -50,8 +30,7 @@ try:
 
         if row_data == []:
             continue
-        if data == []:
-            continue
+
         print(row_data)
 
 except Exception as e:
