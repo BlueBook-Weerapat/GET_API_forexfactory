@@ -4,6 +4,21 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 driver = webdriver.Chrome(ChromeDriverManager().install())
 
+
+
+# from selenium import webdriver
+# from selenium.webdriver.chrome.options import Options
+
+# chromeDriverPath = 'C:/Program Files/Google/Chrome/Application/chrome.exe'
+# userdatadir = 'C:/Users/Weera/AppData/Local/Google/Chrome/User Data'
+# chromeOptions = webdriver.ChromeOptions() 
+# chromeOptions.add_argument(f"--user-data-dir={userdatadir}") #Path to your chrome profile
+# driver = webdriver.Chrome(chromeDriverPath, options=chromeOptions) 
+
+
+
+
+
 try:
     driver.get("https://www.forexfactory.com/calendar?day=nov23.2022")
     # Get the table
@@ -26,42 +41,18 @@ try:
                 return True
             else:
                 return False
-        # sequence = ['g', 'e', 'e', 'j', 'k', 's', 'p', 'r']
-        # filtered = filter(fun, sequence)
         filtered = filter(fun, data)
-        # print('The filtered letters are:')
         for s in filtered:
-            if(s =='calendar__cell calendar__impact impact calendar__impact calendar__impact--holiday'):{print(s)}
-            if(s =='calendar__cell calendar__impact impact calendar__impact calendar__impact--low'):{print(s)}
-            if(s =='calendar__cell calendar__impact impact calendar__impact calendar__impact--medium'):{print(s)}
-            if(s =='calendar__cell calendar__impact impact calendar__impact calendar__impact--high'):{print(s)}
-
-            # print(s)
-
-
-
+            if(s =='calendar__cell calendar__impact impact calendar__impact calendar__impact--holiday'):{ print("\033[37m {}\033[00m" .format('holiday'))}
+            if(s =='calendar__cell calendar__impact impact calendar__impact calendar__impact--low'):{ print("\033[93m {}\033[00m" .format('low'))}
+            if(s =='calendar__cell calendar__impact impact calendar__impact calendar__impact--medium'):{ print("\033[33m {}\033[00m" .format('medium'))}
+            if(s =='calendar__cell calendar__impact impact calendar__impact calendar__impact--high'):{print("\033[91m {}\033[00m" .format('high'))}
 
         if row_data == []:
             continue
         if data == []:
             continue
-            # print('red')
-        # print(row_data)
-        # print(data)
-
-        # print(row)
-
-
-
-
-
-        # if (row.find_element(By.CLASS_NAME, "calendar__cell calendar__impact impact calendar__impact calendar__impact--low")):{
-        #     print("low value")
-        # }
-
-
-
-
+        print(row_data)
 
 except Exception as e:
     print(e)
